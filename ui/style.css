@@ -75,9 +75,14 @@
 }
 .nav_item{
     padding: 10px;
-    font-style: unset;
-    font-size: 17px;
-    font-weight: bold;
+    border: 1px;
+    font-size: 20px;
+    margin: auto;
+    text-align: center;
+    margin-top: 10px;
+    width: 150px;
+    background-color: #C5D9CC
+    
     
 }
 
@@ -114,6 +119,9 @@
 }
 .cta{
 width: 100px;
+position: fixed;
+left: 700px;
+top: 460px;
 
 }
 .text{
