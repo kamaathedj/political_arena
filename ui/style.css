@@ -85,6 +85,13 @@ footer {
   
   
 }
+.list_name{
+  display: inline-block;
+  width: 20%;
+  }
+  .list_head{
+    text-align: center
+  }
 
 
 .button_yes{
