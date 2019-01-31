@@ -132,3 +132,28 @@ color: #3D2DA6;
 display: inline-block;
 width: 33%;
 }
+.signup-form label,
+.signup-form input{
+  display:block;
+  margin-top:1rem;
+  width:25rem;
+  
+
+}
+.signup-form input{
+  border:1px solid #452559;
+  padding:0.3rem 0.6rem;
+  font:inherit;
+  border-radius:0.6rem;
+  background:#C5D9CC;
+}
+.signup-form input:focus{
+  outline:none;
+  background:#e3e3e3;
+  border-color:#3D2DA6;
+}
+.btn-place{
+  margin-left:300px;
+  margin-top:20px;
+
+}
