@@ -181,3 +181,13 @@ margin-top:20px;
 .party_form .slogan{
   width: 30rem;
 }
+.table{
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+td{
+  padding-left: 4rem;
+}
