@@ -195,6 +195,9 @@ td{
   padding-left:9rem;
 
 }
+.seat-space{
+  padding-left: 12rem;
+}
 .signup-form .seat_role{
   height: 100px;
 }
