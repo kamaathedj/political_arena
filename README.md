@@ -4,3 +4,4 @@ added home page
 added sign up page
 added login page
 merged the two branches
+closing this feature
