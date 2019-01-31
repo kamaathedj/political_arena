@@ -92,6 +92,16 @@ footer {
   .list_head{
     text-align: center
   }
+  .form_center{
+    width: 100%;
+    text-align: center;
+    
+  }
+  .align-form{
+    align-self: center;
+    margin-left: 410px;
+    
+  }
 
 
 .button_yes{
@@ -163,4 +173,11 @@ border-color:#3D2DA6;
 margin-left:300px;
 margin-top:20px;
 
+}
+.party_form .slogan,.mission{
+  width: 30rem;
+  height: 6rem;
+}
+.party_form .slogan{
+  width: 30rem;
 }
