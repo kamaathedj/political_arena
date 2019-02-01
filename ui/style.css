@@ -65,7 +65,21 @@ padding-top: 20px;
    border-radius: 20px;
    padding-left: 15px;
 }
-
+.plan{
+  background:#C5D9CC;
+  display: inline-block;
+  width: 23%;
+ 
+  margin:10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+ text-align: center;
+}
+.plans{
+  width: 100%;
+  align-content: center;
+  
+}
 /* Style the footer */
 footer {
   background-color: #5D8AA6;
