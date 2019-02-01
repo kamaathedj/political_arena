@@ -44,6 +44,27 @@ section:after {
   display: table;
   clear: both;
 }
+.vie{
+  align-content: center;
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+.vie label{
+align-content: center;
+padding-top: 20px;
+
+}
+.select{
+  color: #fff;
+  width: 200px;
+  height: 40px;
+  margin-top: -5px;
+   background-color:#5D8AA6;
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+   padding-left: 15px;
+}
 
 /* Style the footer */
 footer {
