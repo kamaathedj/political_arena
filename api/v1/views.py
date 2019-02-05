@@ -8,7 +8,7 @@ userbp=Blueprint("apiv1",__name__,url_prefix = "/api/v1")
 
 # app.logger.info('kamaa')
 PARTY=[]
-@userbp.route('/meme', methods=['POST'])
+@userbp.route('/parties', methods=['POST'])
 def create():
     data=request.get_json(force=True)
     # app.logger.info(data)
