@@ -1,3 +1,2 @@
 # political_arena
-a website to be used during election time
-adding get specific party endpoint
+endpoint to edit an existing party using PATCH method
