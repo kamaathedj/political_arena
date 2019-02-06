@@ -59,6 +59,13 @@ def GetSpecificParty(party_id):
 def GetSpecificPartyAndPatch(partyId):
     for party in PARTIES_DATA:
             if party["id"]==int(partyId): 
+                    data=request.get_json()
+                    name=data['name']
+                    party['name'] =data['name']
+                   
+                    
+
+
                     return jsonify (party)
             else:
                    return jsonify({"message":"not found"},404)
@@ -77,10 +84,7 @@ def deleteParty(partyid):
         {"status" :200},
         {"message":"deleted"})
 
-                # else:
-                #         return "error"
-                              
-
+               
                          
                
 
