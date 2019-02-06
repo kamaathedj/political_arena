@@ -18,5 +18,6 @@ class createParty:
     #     return PARTIES_DATA
 
 
+def deleteParty(id):
 
         

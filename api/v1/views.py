@@ -1,8 +1,9 @@
 from api.v1.models import PARTIES_DATA
 import random
 
-from flask import Flask,jsonify,request,logging,Blueprint,make_response
 
+from flask import Flask,jsonify,request,logging,Blueprint,make_response
+app=Flask(__name__)
 
 userbp=Blueprint("apiv1",__name__,url_prefix = "/api/v1")
 
@@ -40,5 +41,36 @@ def GetParties():
         {"status" :200},
         {"parties":PARTIES_DATA})
 
+@userbp.route('/specificparties/<party_id>', methods=['GET'])
+def GetSpecificParty(party_id):
+        partyid=None
+        for party in PARTIES_DATA:
+                app.logger.info(party)
+                if party['id']==party_id:
+                        partyid=party
+                        app.logger.info(partyid.id)
+                        break
+                return partyid
 
+
+
+@userbp.route('/getparty/<id>', methods=['PATCH'])
+def GetSpecificPartyAndPatch(id):
+    for party in PARTIES_DATA:
+            if id==id:
+                    
+                    return jsonify (party)
+                        
+                       
+@userbp.route('/deleteParty<id>',methods=['DELETE'])
+def deleteParty(id):
+        
+
+
+       
+        
+
+    
+     
+        
 
