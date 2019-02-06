@@ -18,9 +18,14 @@ class createParty:
     #     return PARTIES_DATA
 
 
-def deleteParty(id):
+def getPartyId(id):
+    party_loop=None
     for party in PARTIES_DATA:
         if party.id==id:
-            party.remove()
-    PARTIES_DATA
+            party_loop=party
+            break
+    return party_loop
+
+   
+    
         

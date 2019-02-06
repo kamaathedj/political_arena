@@ -43,29 +43,57 @@ def GetParties():
 
 @userbp.route('/specificparties/<party_id>', methods=['GET'])
 def GetSpecificParty(party_id):
-        partyid=None
         for party in PARTIES_DATA:
-                app.logger.info(party)
-                if party['id']==party_id:
-                        partyid=party
-                        app.logger.info(partyid.id)
+                
+                if party["id"]==int(party_id):
+                        app.logger.info(party)
                         break
-                return partyid
+                else:
+                        return jsonify({"status":400,"message":"not found"})
+
+        return jsonify({"status":200,"message":party})
 
 
 
-@userbp.route('/getparty/<id>', methods=['PATCH'])
-def GetSpecificPartyAndPatch(id):
+@userbp.route('/getparty/<partyId>', methods=['PATCH'])
+def GetSpecificPartyAndPatch(partyId):
     for party in PARTIES_DATA:
-            if id==id:
-                    
+            if party["id"]==int(partyId): 
                     return jsonify (party)
+            else:
+                   return jsonify({"message":"not found"},404)
                         
                        
-@userbp.route('/deleteParty<id>',methods=['DELETE'])
-def deleteParty(id):
-        
+@userbp.route('/deleteParty/<partyid>',methods=['DELETE'])
+def deleteParty(partyid):
+        for party in PARTIES_DATA:
+                app.logger.info(party["id"])
 
+                if party["id"]==int(partyid):
+                        PARTIES_DATA.remove(party)
+                        break
+
+        return jsonify(
+        {"status" :200},
+        {"message":"deleted"})
+
+                # else:
+                #         return "error"
+                              
+
+                         
+               
+
+
+
+            
+
+
+
+            
+                        
+                        
+         
 
        
         
