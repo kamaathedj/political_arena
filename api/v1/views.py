@@ -120,7 +120,11 @@ def createOffice():
     }),400)
 
     
-    
+@userbp.route('/getoffices', methods=['GET'])
+def GetPoliticalOffices():
+    return jsonify(
+        {"status" :200},
+        {"parties":POLITICAL_OFFICE})
 
 
             
