@@ -123,6 +123,20 @@ def GetPoliticalOffices():
         {"parties":POLITICAL_OFFICE})
 
 
+
+@userbp.route('/specificoffice/<office_id>', methods=['GET'])
+def GetSpecificOffice(office_id):
+        for party in POLITICAL_OFFICE:
+                
+                if party["id"]==int(office_id):
+                        app.logger.info(party)
+                        break
+                else:
+                        return jsonify({"status":400,"message":"not found"})
+
+        return jsonify({"status":200,"message":party})
+
+
             
 
 

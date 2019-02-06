@@ -1,2 +1,2 @@
 # political_arena
-an endpoint to get all political offices.
+an endpoint to get specific political office
