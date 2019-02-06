@@ -1,6 +1,7 @@
-from api.config import app_configurations
+from config import app_configurations
 from api.v1.views import userbp
 from flask import Flask
+from api.v1.models import createParty
 
 def creating_app(enviroment):
     app=Flask(__name__)

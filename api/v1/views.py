@@ -1,25 +1,44 @@
-from api.v1.models import createParty
+from api.v1.models import PARTIES_DATA
+import random
 
-from flask import Flask,jsonify,request,logging,Blueprint
+from flask import Flask,jsonify,request,logging,Blueprint,make_response
 
 
 userbp=Blueprint("apiv1",__name__,url_prefix = "/api/v1")
 
 
 # app.logger.info('kamaa')
-PARTY=[]
+
 @userbp.route('/parties', methods=['POST'])
 def create():
     data=request.get_json(force=True)
     # app.logger.info(data)
-  
+    
+    id=random.randint(5,100)
     name=data['name']
     hqAddress=data['hqAddress']
     logoUrl=data['logoUrl']
     # PARTY.append[data]
-    new_party=createParty(name,hqAddress,logoUrl)
-    PARTY.append(data)
+#     new_party=createParty(id,name,hqAddress,logoUrl)
+
+    new_party={
+            "id":id,
+            "name":name,
+            "hqAddress":hqAddress,
+            "logoUrl":logoUrl
+    }
+    
+    PARTIES_DATA.append(new_party)
+    return make_response(jsonify({
+            "status":200,
+            "party":new_party
+    }),200)
+
+@userbp.route('/getparties', methods=['GET'])
+def GetParties():
+    return jsonify(
+        {"status" :200},
+        {"parties":PARTIES_DATA})
 
 
-   
-    return jsonify(PARTY)
+
