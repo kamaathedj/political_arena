@@ -2,6 +2,7 @@ from flask import Flask
 
 app=Flask(__name__)
 PARTIES_DATA=[]
+POLITICAL_OFFICE=[]
 
 
 class createParty:
@@ -27,5 +28,10 @@ def getPartyId(id):
     return party_loop
 
    
-    
-        
+class createOffice:
+    def __init__(self,id,name,type):
+        self.id=id
+        self.name=name
+        self.type=type
+
+  

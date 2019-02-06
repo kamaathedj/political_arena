@@ -83,10 +83,12 @@ def deleteParty(partyid):
         return jsonify(
         {"status" :200},
         {"message":"deleted"})
+        
 
                
                          
-               
+        # create political office
+       
 
 
 
