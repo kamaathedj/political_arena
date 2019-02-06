@@ -86,21 +86,17 @@ def deleteParty(partyid):
         
 
                
-                         
-        # create political office
-       
+      
 @userbp.route('/offices', methods=['POST'])
 def createOffice():
     data=request.get_json(force=True)
-    # app.logger.info(data)
+   
     
     id=random.randint(5,100)
     name=data['name']
     type=data['type']
     
-    # PARTY.append[data]
-#     new_party=createParty(id,name,hqAddress,logoUrl)
-
+   
     new_office={
             "id":id,
             "name":name,
@@ -120,7 +116,11 @@ def createOffice():
     }),400)
 
     
-    
+@userbp.route('/getoffices', methods=['GET'])
+def GetPoliticalOffices():
+    return jsonify(
+        {"status" :200},
+        {"parties":POLITICAL_OFFICE})
 
 
             
