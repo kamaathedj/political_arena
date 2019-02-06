@@ -61,13 +61,12 @@ def GetSpecificPartyAndPatch(partyId):
             if party["id"]==int(partyId): 
                     data=request.get_json()
                     name=data['name']
-                    hqAddress=data['hqAddress']
-                    logoUrl=data['logoUrl']
-                    
+                    party['name'] =data['name']
+                   
                     
 
 
-                    return jsonify (data)
+                    return jsonify (party)
             else:
                    return jsonify({"message":"not found"},404)
                         
