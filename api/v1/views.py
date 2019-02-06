@@ -77,10 +77,7 @@ def deleteParty(partyid):
         {"status" :200},
         {"message":"deleted"})
 
-                # else:
-                #         return "error"
-                              
-
+               
                          
                
 
