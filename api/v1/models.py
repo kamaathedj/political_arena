@@ -19,5 +19,8 @@ class createParty:
 
 
 def deleteParty(id):
-
+    for party in PARTIES_DATA:
+        if party.id==id:
+            party.remove()
+    PARTIES_DATA
         
