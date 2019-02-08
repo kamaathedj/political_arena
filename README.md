@@ -5,3 +5,6 @@
 
 
 [![Build Status](https://travis-ci.org/kamaathedj/political_arena.svg?branch=Development)](https://travis-ci.org/kamaathedj/political_arena)
+
+
+[![Coverage Status](https://coveralls.io/repos/github/kamaathedj/political_arena/badge.svg?branch=master)](https://coveralls.io/github/kamaathedj/political_arena?branch=master)
