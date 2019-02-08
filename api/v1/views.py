@@ -31,9 +31,9 @@ def create():
     
     PARTIES_DATA.append(new_party)
     return make_response(jsonify({
-            "status":200,
-            "party":new_party
-    }),200)
+            "status":201,
+            "msg":"Created"
+    }),201)
 
 @userbp.route('/getparties', methods=['GET'])
 def GetParties():
@@ -48,6 +48,7 @@ def GetSpecificParty(party_id):
                 if party["id"]==int(party_id):
                         app.logger.info(party)
                         break
+                        
                 else:
                         return jsonify({"status":400,"message":"not found"})
 
@@ -103,18 +104,19 @@ def createOffice():
             "type":type
             
     }
-    if new_office!=None:
+    if new_office!=None and name:
             POLITICAL_OFFICE.append(new_office)
             return make_response(jsonify({
-            "status":200,"message":"success",
+            "status":200,"message":"Created",
             "party":new_office
     }),201)
-    else:
+    elif new_office==None:
             return make_response(jsonify({
             "status":400,"message":"bad request"
            
     }),400)
-
+    else:
+            return jsonify({"message":"error"})
     
 @userbp.route('/getoffices', methods=['GET'])
 def GetPoliticalOffices():
@@ -124,18 +126,12 @@ def GetPoliticalOffices():
 
 
 
-@userbp.route('/specificoffice/<office_id>', methods=['GET'])
+@userbp.route('/specificoffice/<int:office_id>',methods=['GET'])
 def GetSpecificOffice(office_id):
-        for party in POLITICAL_OFFICE:
-                
-                if party["id"]==int(office_id):
-                        app.logger.info(party)
-                        break
-                else:
-                        return jsonify({"status":400,"message":"not found"})
-
-        return jsonify({"status":200,"message":party})
-
+        
+        political_office=[office for office in POLITICAL_OFFICE if office['id']==office_id]
+        return jsonify({"office":political_office[0]},200)
+       
 
             
 
