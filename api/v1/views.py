@@ -43,16 +43,18 @@ def GetParties():
 
 @userbp.route('/specificparties/<party_id>', methods=['GET'])
 def GetSpecificParty(party_id):
+        party_result = None 
         for party in PARTIES_DATA:
                 
                 if party["id"]==int(party_id):
                         app.logger.info(party)
+                        party_result = party
                         break
                         
                 else:
                         return jsonify({"status":400,"message":"not found"})
 
-        return jsonify({"status":200,"message":party})
+        return jsonify({"status":200,"message":party_result})
 
 
 
@@ -130,6 +132,11 @@ def GetPoliticalOffices():
 def GetSpecificOffice(office_id):
         
         political_office=[office for office in POLITICAL_OFFICE if office['id']==office_id]
+        # print(political_office)
+        # import pdb; pdb.set_trace()
+        print("####")
+        print(POLITICAL_OFFICE)
+        print("####")
         return jsonify({"office":political_office[0]},200)
        
 
