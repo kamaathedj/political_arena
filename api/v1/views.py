@@ -52,7 +52,7 @@ def GetSpecificParty(party_id):
                         break
                         
                 else:
-                        return jsonify({"status":400,"message":"not found"})
+                        rgetpartieseturn jsonify({"status":400,"message":"not found"})
 
         return jsonify({"status":200,"message":party_result})
 
