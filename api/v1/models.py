@@ -1,4 +1,3 @@
-from flask import Flask
 
 
 PARTIES_DATA=[
@@ -19,32 +18,68 @@ POLITICAL_OFFICE=[
 
 
 class createParty:
-    def __init__(self,id,name,hqAddress,logoUrl):
-        self.id=id
-        self.name=name
-        self.hqAddress=hqAddress
-        self.logoUrl=logoUrl
-
-  
         
-    # def parties(self):
-    #     app.logger.info(PARTIES_DATA)
-    #     return PARTIES_DATA
+    def parties(self,mlist):
+        PARTIES_DATA.append(mlist)
+        return PARTIES_DATA
 
 
-# def getPartyId(id):
-#     party_loop=None
-#     for party in PARTIES_DATA:
-#         if party.id==id:
-#             party_loop=party
-#             break
-#     return party_loop
+    def getPartyId(self,id):
+        party_loop=None
+        for party in PARTIES_DATA:
+            
+            if party["id"]==id:
+                party_loop=party
+                
+                break
+        return party_loop
+
+
+    def Getparties(self):
+        return PARTIES_DATA
+
+    def GetSpecificPartyAndPatch(self,party_id,name):
+        for party in PARTIES_DATA:
+            if party['id']==party_id:
+                party['name'] =name
+                break
+                
+            return party
+    def GetSpecificPartyAndDelete(self,partyid):
+        message=None
+        for party in PARTIES_DATA:
+            if party['id']==partyid:
+                PARTIES_DATA.remove(party)
+                message='success'
+                  
+            else:
+                message='not found'
+        
+       
+        return message
+                   
+
 
    
-class createOffice:
-    def __init__(self,id,name,type):
-        self.id=id
-        self.name=name
-        self.type=type
+class CreateOffice:    
+    def offices(self,mlist):
+        POLITICAL_OFFICE.append(mlist)
+        return POLITICAL_OFFICE
 
-  
+
+
+
+
+    def GetAllOffices(self):
+        return POLITICAL_OFFICE
+
+
+    def GetOfficeId(self,id):
+        office_loop=None
+        for office in POLITICAL_OFFICE:
+            
+            if office["id"]==id:
+                office_loop=office
+                
+                break
+        return office_loop
