@@ -73,6 +73,10 @@ class test_politico(unittest.TestCase):
         # import pdb; pdb.set_trace()
         self.assertNotIn(response.data,"office deleted succesfully")
 
+  
+        
+
+
     
         
     
