@@ -39,10 +39,28 @@ venv/bin/activate
 ```
 
 ###### Running the Api
+
 ```
 flask run
 ```
-###### Testing the Api
+### Running Api with enviromental variables
+
+
+| **Enviromental variable** | **Debug** | **DESCRIPTION** |
+| --- | --- | --- |
+| **production** | `False` | Used when deploying to the internet |
+| **development** | `True` | Used during active development of the system |
+| **testing** | `True` | Used when testing the system |
+
+###### Open the .env file and pass the enviromental variable you want to run the Api in.
+```
+export FLASK_ENV=development
+```
+###### learn more about enviromental variables
+[https://github.com/dwyl/learn-environment-variables/blob/master/README.md]
+
+*Note : Things like secret key and database uri can be kept in enviromental variables e.g uri for both database for development and production*
+### Testing the Api
 ```
 pytest
 ```
