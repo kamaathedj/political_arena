@@ -1,5 +1,5 @@
-from api.v1.models import createParty,CreateOffice
-import random
+from api.v1.models import createParty,CreateOffice,POLITICAL_OFFICE,PARTIES_DATA
+
 from flask import Flask,jsonify,request,logging,Blueprint,make_response
 
 
@@ -16,7 +16,7 @@ def create():
     data=request.get_json(force=True)
     # app.logger.info(data)
     
-    id=random.randint(5,100)
+    id=len(PARTIES_DATA)+1
     name=data['name']
     hqAddress=data['hqAddress']
     logoUrl=data['logoUrl']
@@ -93,30 +93,36 @@ def deleteParty(partyid):
       
 @userbp.route('/offices', methods=['POST'])
 def createOffice():
+    message=""
     data=request.get_json()
-   
+    if data:
+            id=len(POLITICAL_OFFICE)+1
+            name=data['name']
+            mtype=data['type']
     
-    id=random.randint(5,100)
-    name=data['name']
-    type=data['type']
     
    
-    new_office={
-            "id":id,
-            "name":name,
-            "type":type
+            new_office={ "id":id, "name":name,"type":mtype}
+            office_data.offices(new_office)
+            message="Created"
             
-    }
-    office_data.offices(new_office)
+            
+           
+    else:
+            
+            message="no data"
+    
+    
 
-    return jsonify({"message":"Created"},201)
+    return jsonify({"message":message},201)
     
     
 @userbp.route('/offices', methods=['GET'])
 def GetPoliticalOffices():
    resp=office_data.GetAllOffices()
+   
+   return jsonify({"message":resp})
 
-   return jsonify({"Message":resp})
 
 
 
