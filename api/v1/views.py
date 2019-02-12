@@ -30,22 +30,12 @@ def create():
    
                     party_data.parties(new_party)
                     message="Created" 
-                    return jsonify({"message":message},201) 
+                    return jsonify({"message":message}), 201 
                     
             else:
                     return jsonify({"status":400,"message":"all the data must be type string"},400)
     else:
             return jsonify({  "status":400, "message":"No data found" },400)
-
-                
-        
-             
-                 
-             
-                
-            
-    
-   
 
 @userbp.route('/parties', methods=['GET'])
 def GetParties():
@@ -71,17 +61,6 @@ def GetSpecificParty(party_id):
 
                 return jsonify({"status" : 200, "message": mparty})           
 
-
-
-      
-        
-        
-        
-
-
-       
-
-
 @userbp.route('/parties/<int:partyid>', methods=['PATCH'])
 def SpecificPartyAndPatch(partyid):
         data=request.get_json()
@@ -90,22 +69,12 @@ def SpecificPartyAndPatch(partyid):
         
       
         return jsonify({"message":"success"},200)
-      
-
-   
-                        
+                     
                        
 @userbp.route('/parties/<int:partyid>',methods=['DELETE'])
 def deleteParty(partyid):
         message=party_data.GetSpecificPartyAndDelete(partyid)
-        return jsonify({"message":message},200)
-
-
-                
-                       
-        
-
-               
+        return jsonify({"message":message},200)            
       
 @userbp.route('/offices', methods=['POST'])
 def createOffice():
@@ -130,20 +99,10 @@ def createOffice():
                     return jsonify({"message":message},201) 
                     
             else:
-                    return jsonify({"status":400,"message":"all the data must be type string"},400)
-                
-        
-             
-                 
-                    
-                     
+                    return jsonify({"status":400,"message":"all the data must be type string"},400)               
            
     else:
-            return jsonify({  "status":400, "message":"No data found" },400)
-    
-    
-
-   
+            return jsonify({  "status":400, "message":"No data found" },400)   
     
     
 @userbp.route('/offices', methods=['GET'])

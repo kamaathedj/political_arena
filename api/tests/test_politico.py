@@ -2,7 +2,7 @@ import unittest
 import json
 from run import app
 
-party_data={}
+
 
 class test_politico(unittest.TestCase):
     def setUp(self):
@@ -34,54 +34,41 @@ class test_politico(unittest.TestCase):
    
         # self.assertIsInstance(resp.json['name'],str)
         # self.assertTrue(resp.json["id"])
-        self.assertEqual(resp.json['msg'], 'Created')
+        self.assertEqual(resp.json['message'], 'Created')
 
     def test_getall_parties(self):
-        resp=self.client.get(path='api/v1/getparties',content_type='application/json')
+        resp=self.client.get(path='api/v1/parties',content_type='application/json')
         self.assertEqual(resp.status_code,200)
     def test_name_should_be_string(self):
         pass
 
     def test_getting_a_single_party(self):
         party = self.post()
-        path = '/api/v1/specificparties/1'
+        path = '/api/v1/party/1'
         response = self.client.get(path, content_type='application/json')
         self.assertEqual(response.status_code, 200)
 
     def test_deleting_a_party(self):
-        path = '/api/v1/deleteParty/1'
+        path = '/api/v1/parties/1'
         response = self.client.delete(path, content_type='application/json')
         self.assertEqual(response.status_code, 200)
         
 
-
-
-
     def test_getall_political_offices(self):
-        resp=self.client.get(path='api/v1/getoffices',content_type='application/json')
+        resp=self.client.get(path='api/v1/offices',content_type='application/json')
         self.assertEqual(resp.status_code,200)
 
     def test_specific_office(self):
         office = self.post_office()
-        path = '/api/v1/specificoffice/1'
+        path = '/api/v1/offices/1'
         response = self.client.get(path, content_type='application/json')
         self.assertEqual(response.status_code, 200)
 
 
     def test_delete_specific_office(self):
-        response=self.client.delete("api/v1/deleteparty/0",content_type='application/json')
+        response=self.client.delete("api/v1/parties/0",content_type='application/json')
         # import pdb; pdb.set_trace()
         self.assertNotIn(response.data,"office deleted succesfully")
-
-  
-        
-
-
-    
-        
-    
-        
-
 
     
 

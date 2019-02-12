@@ -1,5 +1,4 @@
 
-
 PARTIES_DATA=[
     {
         "id": 1, 
@@ -58,9 +57,6 @@ class createParty:
         
        
         return message
-                   
-
-
    
 class CreateOffice:    
     def offices(self,mdict):
@@ -68,9 +64,6 @@ class CreateOffice:
         # import pdb; pdb.set_trace()
          
         return POLITICAL_OFFICE
-
-
-
 
 
     def GetAllOffices(self):
