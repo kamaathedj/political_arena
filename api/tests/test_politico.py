@@ -2,8 +2,6 @@ import unittest
 import json
 from run import app
 
-
-
 class test_politico(unittest.TestCase):
     def setUp(self):
         self.app=app
@@ -16,24 +14,17 @@ class test_politico(unittest.TestCase):
             data = self.data_party
 
         resp = self.client.post(path='api/v1/parties', data=json.dumps(self.data_party), content_type='application/json')
-        
         return resp
 
     def post_office(self, path='/offices', data={}):
         if not data:
             data = self.office
-
         resp = self.client.post(path='api/v1/', data=json.dumps(self.data_party), content_type='application/json')
-        
         return resp
-
 
     def test_posting_a_political_party(self):
         resp = self.post()
         self.assertEqual(resp.status_code, 201)
-   
-        # self.assertIsInstance(resp.json['name'],str)
-        # self.assertTrue(resp.json["id"])
         self.assertEqual(resp.json['message'], 'Created')
 
     def test_getall_parties(self):
@@ -53,7 +44,6 @@ class test_politico(unittest.TestCase):
         response = self.client.delete(path, content_type='application/json')
         self.assertEqual(response.status_code, 200)
         
-
     def test_getall_political_offices(self):
         resp=self.client.get(path='api/v1/offices',content_type='application/json')
         self.assertEqual(resp.status_code,200)
@@ -64,13 +54,9 @@ class test_politico(unittest.TestCase):
         response = self.client.get(path, content_type='application/json')
         self.assertEqual(response.status_code, 200)
 
-
     def test_delete_specific_office(self):
         response=self.client.delete("api/v1/parties/0",content_type='application/json')
-        # import pdb; pdb.set_trace()
-        self.assertNotIn(response.data,"office deleted succesfully")
-
-    
+        self.assertNotIn(response.data,"office deleted succesfully") 
 
 if __name__ == "__main__":
     unittest.main()

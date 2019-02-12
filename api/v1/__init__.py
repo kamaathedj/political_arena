@@ -7,5 +7,4 @@ def creating_app(enviroment):
     app=Flask(__name__)
     app.config.from_object(app_configurations[enviroment])
     app.register_blueprint(userbp)
-    
     return app

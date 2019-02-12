@@ -1,15 +1,12 @@
 
 # political_arena
 
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/930de259caf8289c8cc0/maintainability)](https://codeclimate.com/github/kamaathedj/political_arena/maintainability) [![Build Status](https://travis-ci.org/kamaathedj/political_arena.svg?branch=Development)](https://travis-ci.org/kamaathedj/political_arena) [![Coverage Status](https://coveralls.io/repos/github/kamaathedj/political_arena/badge.svg?branch=Development)](https://coveralls.io/github/kamaathedj/political_arena?branch=Development)
-
 
 ## Description
 Politico enables citizens give their mandate to politicians running for different government offices
 while building trust in the process through transparency.
 ## API Endpoints V1
-
 
 | **METHODS** | **LINKS** | **DESCRIPTION** |
 | --- | --- | --- |
