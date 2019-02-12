@@ -52,7 +52,7 @@ flask run
 | **development** | `True` | Used during active development of the system |
 | **testing** | `True` | Used when testing the system |
 
-###### Open the .env file and pass the enviromental variable you want to run the Api in.
+###### Create the .env file in the root of the project and pass the enviromental variable you want to run the Api in.
 ```
 export FLASK_ENV=development
 ```
