@@ -1,9 +1,4 @@
-PARTIES_DATA = [{
-    'id': 1,
-    'name': 'Jubilee',
-    'hqAddress': 'nairobi',
-    'logoUrl': 'www.google.com',
-    }]
+PARTIES_DATA = [{'id': 1,'name': 'Jubilee','hqAddress': 'nairobi','logoUrl': 'www.google.com'}]
 
 POLITICAL_OFFICE = [{'id': 1, 'name': 'meme', 'type': 'president'}]
 
