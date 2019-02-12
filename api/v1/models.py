@@ -21,6 +21,7 @@ class createParty:
         
     def parties(self,mlist):
         PARTIES_DATA.append(mlist)
+        
         return PARTIES_DATA
 
 
@@ -62,8 +63,10 @@ class createParty:
 
    
 class CreateOffice:    
-    def offices(self,mlist):
-        POLITICAL_OFFICE.append(mlist)
+    def offices(self,mdict):
+        POLITICAL_OFFICE.append(mdict)
+        # import pdb; pdb.set_trace()
+         
         return POLITICAL_OFFICE
 
 
