@@ -4,6 +4,7 @@ class BaseConfig:
 
 class DevelopmentConfig(BaseConfig):
     DEBUG=True
+    
 class TestingConfig():
     DEBUG=True
 class ProductionConfig():
