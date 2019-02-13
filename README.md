@@ -83,4 +83,3 @@ pytest
 "type":"Head of state"
 }
 ```
-
