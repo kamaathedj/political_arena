@@ -5,7 +5,7 @@ from flask import Flask
 from api.v1.models import createParty
 
 def creating_app(enviroment):
-    app=Flask(__name__)
+    app=Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_configurations[enviroment])
     app.register_blueprint(userbp)
     app.register_blueprint(v2_bp)
