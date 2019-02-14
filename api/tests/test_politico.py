@@ -5,7 +5,7 @@ from api import creating_app
 
 class test_politico(unittest.TestCase):
     def setUp(self):
-        self.app=creating_app(enviroment="testing")
+        self.app=app
         self.client=self.app.test_client()
         self.data_party={"id":1,"name":"odm","hqAddress":"nairobi","logoUrl":"gfgfgf"}
         self.office={"name":"uhuru kenyatta","type":"president"}
