@@ -32,7 +32,7 @@ def create():
             new_party = {'id': id,'name': name,'hqAddress': hqAddress,'logoUrl': logoUrl}
             party_data.parties(new_party)
             message = 'Created'
-            return (jsonify({'message': message}), 201)
+            return jsonify({'message': message}), 201
         else:
             return jsonify({'status': 400,
                            'message': 'all the data must be type string'

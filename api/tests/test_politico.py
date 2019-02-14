@@ -1,6 +1,7 @@
 import unittest
 import json
 from run import app
+from api import creating_app
 
 class test_politico(unittest.TestCase):
     def setUp(self):
@@ -21,12 +22,7 @@ class test_politico(unittest.TestCase):
             data = self.office
         resp = self.client.post(path='api/v1/', data=json.dumps(self.data_party), content_type='application/json')
         return resp
-
-    def test_posting_a_political_party(self):
-        resp = self.post()
-        self.assertEqual(resp.status_code, 201)
-        self.assertEqual(resp.json['message'], 'Created')
-
+        
     def test_getall_parties(self):
         resp=self.client.get(path='api/v1/parties',content_type='application/json')
         self.assertEqual(resp.status_code,200)
@@ -57,6 +53,9 @@ class test_politico(unittest.TestCase):
     def test_delete_specific_office(self):
         response=self.client.delete("api/v1/parties/0",content_type='application/json')
         self.assertNotIn(response.data,"office deleted succesfully") 
+
+    def tearDown(self):
+        pass
 
 if __name__ == "__main__":
     unittest.main()
