@@ -1,6 +1,6 @@
 language: python
 
-repo_token: bORvIT6qSJYenKryEOXsgfZ6RnQo7r3bw
+# repo_token: bORvIT6qSJYenKryEOXsgfZ6RnQo7r3bw
 
 python:
   - "2.7"
