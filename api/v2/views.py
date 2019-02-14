@@ -5,6 +5,7 @@ from flask import Flask, jsonify, request, logging, Blueprint, \
     make_response, json
 app = Flask(__name__)
 userbp = Blueprint('apiv1', __name__, url_prefix='/api/v1')
+v2_bp=Blueprint('apiv2',__name__,url_prefix='/api/v2')
 party_data = createParty()
 office_data = CreateOffice()
 
@@ -19,7 +20,7 @@ def create():
         name = dictData['name']
         hqAddress = dictData['hqAddress']
         logoUrl = dictData['logoUrl']
-        if isinstDAance(name, str) and isinstance(hqAddress, str) \
+        if isinstance(name, str) and isinstance(hqAddress, str) \
             and isinstance(logoUrl, str):
             new_party = {
                 'id': id,
@@ -120,4 +121,6 @@ def GetSpecificOffice(office_id):
     else:
         return jsonify({'status': 404,
                        'Message': 'id must be of type int'}, 404)
+
+
 

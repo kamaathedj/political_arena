@@ -15,19 +15,21 @@ def create():
     response = request.get_json(force=True)
     data = json.dumps(response)
     dictData = ast.literal_eval(data)
-    if dictData:
+    if dictData and dictData['name'] is not "" and dictData['hqAddress'] is not "" and dictData['logoUrl'] is not "":
         id = len(POLITICAL_OFFICE) + 1
         name = dictData['name']
         hqAddress = dictData['hqAddress']
         logoUrl = dictData['logoUrl']
         if isinstance(name, str) and isinstance(hqAddress, str) \
             and isinstance(logoUrl, str):
-            new_party = {
-                'id': id,
-                'name': name,
-                'hqAddress': hqAddress,
-                'logoUrl': logoUrl,
-                }
+            for party in PARTIES_DATA:
+                if party["name"] != name and party['logoUrl'] !=logoUrl:
+                    continue
+                else:
+                    return jsonify({'message': "cannot register twice"}, 400)  
+
+
+            new_party = {'id': id,'name': name,'hqAddress': hqAddress,'logoUrl': logoUrl}
             party_data.parties(new_party)
             message = 'Created'
             return (jsonify({'message': message}), 201)
@@ -36,7 +38,7 @@ def create():
                            'message': 'all the data must be type string'
                            }, 400)
     else:
-        return jsonify({'status': 400, 'message': 'No data found'}, 400)
+        return jsonify({'status': 400, 'message': 'No data found,please provide all the fields'}, 400)
 
 
 @userbp.route('/parties', methods=['GET'])
@@ -79,24 +81,26 @@ def createOffice():
     response = request.get_json(force=True)
     data = json.dumps(response)
     dictData = ast.literal_eval(data)
-    if data:
+    if data and dictData['name'] is not "" and dictData['type'] is not "":
         id = len(POLITICAL_OFFICE) + 1
         name = dictData['name']
         mtype = dictData['type']
         if isinstance(name, str) and isinstance(mtype, str):
-            print (type(name), type(mtype))
+            for office in POLITICAL_OFFICE:
+               if office["name"] != name and office['type'] !=mtype:
+                    continue
+               else:
+                   return jsonify({'message': "cannot register twice"}, 400)  
             new_office = {'id': id, 'name': name, 'type': mtype}
             office_data.offices(new_office)
             message = 'Created'
-            return jsonify({'message': message}, 201)
+            return jsonify({'message': message}, 201)           
         else:
-
             return jsonify({'status': 400,
                            'message': 'all the data must be type string'
                            }, 400)
     else:
-
-        return jsonify({'status': 400, 'message': 'No data found'}, 400)
+        return jsonify({'status': 400, 'message': 'No data found,please provide all the data'}, 400)
 
 
 @userbp.route('/offices', methods=['GET'])
@@ -110,7 +114,7 @@ def GetSpecificOffice(office_id):
     try:
         id = int(office_id)
     except:
-        return jsonify({'status': 404, 'Message': 'not found'})
+        return jsonify({'status': 404, 'Message': 'id must be of type int'})
     variable_types = (int, )
     print (variable_types, type(variable_types))
     if isinstance(id, variable_types):
@@ -120,5 +124,5 @@ def GetSpecificOffice(office_id):
         return jsonify({'message': mOffice})
     else:
         return jsonify({'status': 404,
-                       'Message': 'id must be of type int'}, 404)
+                       'Message': 'not found'}, 404)
 
