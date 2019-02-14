@@ -18,7 +18,7 @@ def CreateTable():
     
     
 def tables():
-    users_table = """CREATE TABLE IF NOT EXISTS users_table (
+    user= """CREATE TABLE IF NOT EXISTS user (
         id serial PRIMARY KEY NOT NULL,
         firstname character varying(50) NOT NULL,
         lastname character varying(50) NOT NULL,
@@ -28,25 +28,55 @@ def tables():
         phonenumber character varying(30),
         password character varying(50) NOT NULL,
         passportUrl character varying(50),
-        registered timestamp with time zone DEFAULT ('now'::text)::date NOT NULL,
         isAdmin boolean NOT NULL
     )"""
 
-    party = """CREATE TABLE IF NOT EXISTS party_table (
+    party = """CREATE TABLE IF NOT EXISTS party(
         id serial PRIMARY KEY NOT NULL,
         name character varying(20) NOT NULL,
         hqAddress character varying(30) NOT NULL,
         logoUrl character varying(50)
         
     )"""
-    office = """CREATE TABLE IF NOT EXISTS office_table (
+    office = """CREATE TABLE IF NOT EXISTS office (
         id serial PRIMARY KEY NOT NULL,
         name character varying(20) NOT NULL,
         type character varying(30) NOT NULL
         
     )"""
 
-    queries = [users_table, party]
+    candidate = """CREATE TABLE IF NOT EXISTS candidate(
+        id serial PRIMARY KEY NOT NULL,
+        office_id INT NOT NULL REFERENCES office(id) ON DELETE CASCADE,
+        party_id INT NOT NULL REFERENCES party(id) ON DELETE CASCADE,
+        candidate_id INT NOT NULL REFERENCES user(id) ON DELETE CASCADE,
+        UNIQUE(office_id,party_id,candidate_id)
+    
+    )"""
+
+    vote = """CREATE TABLE IF NOT EXISTS vote (
+        id serial PRIMARY KEY NOT NULL,
+        createdOn timestamp with time zone DEFAULT ('now'::text)::date NOT NULL,
+        createdBy INT NOT NULL REFERENCES user(id) ON DELETE CASCADE,
+        office_id INT NOT NULL REFERENCES office(id) ON DELETE CASCADE,
+        candidate_id INT NOT NULL REFERENCES candidate(id) ON DELETE CASCADE,
+        UNIQUE(createdBy,office_id,candidate_id)
+        
+    )"""
+    petition = """CREATE TABLE IF NOT EXISTS petition(
+        id serial PRIMARY KEY NOT NULL,
+        createdOn timestamp with time zone DEFAULT ('now'::text)::date NOT NULL,
+        createdBy INT NOT NULL REFERENCES user(id) ON DELETE CASCADE,
+        office_id INT NOT NULL REFERENCES office(id) ON DELETE CASCADE,
+        body character varying(20) NOT NULL,
+        UNIQUE(createdBy,office_id)
+
+    )"""
+
+
+#error in candidate and vote
+
+    queries = [user, party,office,candidate,vote,petition]
     return queries
 
     

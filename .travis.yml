@@ -1,6 +1,6 @@
 language: python
 
-repo_token: bORvIT6qSJYenKryEOXsgfZ6RnQo7r3bw
+# repo_token: bORvIT6qSJYenKryEOXsgfZ6RnQo7r3bw
 
 python:
   - "2.7"
@@ -13,9 +13,10 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+  - pip install pytest
 # command to run tests
 script:
   - pytest
 
-:after_success:
--coveralls
+after_success:
+  - coveralls

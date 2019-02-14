@@ -1,3 +1,5 @@
+PARTIES_DATA=[]
+POLITICAL_OFFICE=[]
 class createParty:
 
     def parties(self, mlist):
@@ -50,6 +52,9 @@ class CreateOffice:
                 break
         return office_loop
 
+class CreateUser:
+    def user(self):
+        pass
 
 
 			

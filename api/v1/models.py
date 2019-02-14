@@ -1,6 +1,7 @@
 PARTIES_DATA = [{'id': 1,'name': 'Jubilee','hqAddress': 'nairobi','logoUrl': 'www.google.com'}]
 
-POLITICAL_OFFICE = [{'id': 1, 'name': 'meme', 'type': 'president'}]
+POLITICAL_OFFICE = [{'id': 1, 'name': 'meme', 'type': 'president'},{'id': 2, 'name': 'wat', 'type': 'mp'}]
+
 
 
 class createParty:
@@ -41,6 +42,9 @@ class createParty:
 class CreateOffice:
 
     def offices(self, mdict):
+        print(mdict)
+        name=mdict['name']
+        mtype=mdict['type']
         POLITICAL_OFFICE.append(mdict)
         return POLITICAL_OFFICE
 
