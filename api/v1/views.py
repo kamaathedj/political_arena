@@ -26,7 +26,7 @@ def create():
                 if party["name"] != name and party['logoUrl'] !=logoUrl:
                     continue
                 else:
-                    return jsonify({'message': "cannot register twice"}, 400)  
+                    return jsonify({'Error': "Cannot register a party with the same name and type","status": 409}),409  
 
 
             new_party = {'id': id,'name': name,'hqAddress': hqAddress,'logoUrl': logoUrl}
@@ -35,45 +35,64 @@ def create():
             return jsonify({'message': message}), 201
         else:
             return jsonify({'status': 400,
-                           'message': 'all the data must be type string'
+                           'message': 'The data you entered in the fieds are of diffrent type than the requires'
                            }, 400)
     else:
-        return jsonify({'status': 400, 'message': 'No data found,please provide all the fields'}, 400)
+        return jsonify({'status': 400, 'message': 'No data found,please provide all the fields .'}, 400)
 
 
 @userbp.route('/parties', methods=['GET'])
 def GetParties():
     parties = party_data.Getparties()
-    return jsonify({'message': parties})
-
+    if parties == None:
+        return jsonify({"message":"the requested resource is empty","status":404}),404
+        
+    return jsonify({'message': parties,"status":200}),200   
 
 @userbp.route('/party/<party_id>', methods=['GET'])
 def GetSpecificParty(party_id):
     try:
         id = int(party_id)
     except:
-        return jsonify({'status': 404, 'message': 'not found'})
+        return jsonify({'status': 404, 'message': 'not found'}),404
     specific_party = party_data.getPartyId(id)
     if specific_party is None:
-        return jsonify({'status': 404, 'message': 'not found'})
+        return jsonify({'status': 404, 'message': 'not found'}),404
     else:
         mparty = []
         mparty.append(specific_party)
         return jsonify({'status': 200, 'message': mparty})
 
 
-@userbp.route('/parties/<int:partyid>', methods=['PATCH'])
+@userbp.route('/parties/<partyid>', methods=['PATCH'])
 def SpecificPartyAndPatch(partyid):
+    try:
+        id=int(partyid)
+    except:
+        return jsonify({"error":'bad request',"status":400}),400
     data = request.get_json()
-    name = data['name']
-    specific_party = party_data.GetSpecificPartyAndPatch(partyid, name)
-    return jsonify({'message': 'success'}, 200)
-
-
-@userbp.route('/parties/<int:partyid>', methods=['DELETE'])
+    
+    
+    if data:
+        name = data['name']
+        if isinstance(name,str):
+            specific_party = party_data.GetSpecificPartyAndPatch(id, name)
+            return jsonify({'message': specific_party,'status':200}),200
+        else:
+            return jsonify({'Error': "please insert correct fields",'status':400}),400   
+        
+    else:
+        return jsonify({"error":"No field provided","status":400}),400
+    
+@userbp.route('/parties/<partyid>', methods=['DELETE'])
 def deleteParty(partyid):
-    message = party_data.GetSpecificPartyAndDelete(partyid)
-    return jsonify({'message': message}, 200)
+    try:
+        id=int(partyid)
+    except:
+        return jsonify({"error":"bad request",'status':400}),400
+    message = party_data.GetSpecificPartyAndDelete(id)
+    return jsonify({'message': message,'status':200}),200
+    
 
 
 @userbp.route('/offices', methods=['POST'])
@@ -90,23 +109,28 @@ def createOffice():
                if office["name"] != name and office['type'] !=mtype:
                     continue
                else:
-                   return jsonify({'message': "cannot register twice"}, 400)  
+                   return jsonify({'message': "Cannot register an office twice"}, 400)  
             new_office = {'id': id, 'name': name, 'type': mtype}
             office_data.offices(new_office)
             message = 'Created'
             return jsonify({'message': message}, 201)           
         else:
             return jsonify({'status': 400,
-                           'message': 'all the data must be type string'
+                           'message': 'All the data must be type string'
                            }, 400)
     else:
-        return jsonify({'status': 400, 'message': 'No data found,please provide all the data'}, 400)
+        return jsonify({'status': 400, 'message': 'No data found,please provide all the data required'}, 400)
 
 
 @userbp.route('/offices', methods=['GET'])
 def GetPoliticalOffices():
+    if PARTIES_DATA ==None:
+         return jsonify({'error': "No data found","status":400}),400
+
     resp = office_data.GetAllOffices()
-    return jsonify({'message': resp})
+    return jsonify({'message': resp,'status':200}),200
+
+       
 
 
 @userbp.route('/offices/<office_id>', methods=['GET'])
@@ -114,15 +138,14 @@ def GetSpecificOffice(office_id):
     try:
         id = int(office_id)
     except:
-        return jsonify({'status': 404, 'Message': 'id must be of type int'})
+        return jsonify({'status': 404, 'Message': 'id must be of a number'}),404
     variable_types = (int, )
-    print (variable_types, type(variable_types))
-    if isinstance(id, variable_types):
+    if isinstance(id, variable_types) and id:
         specific_office = office_data.GetOfficeId(id)
         mOffice = []
         mOffice.append(specific_office)
         return jsonify({'message': mOffice})
     else:
         return jsonify({'status': 404,
-                       'Message': 'not found'}, 404)
+                       'error': 'e requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.'}, 404)
 

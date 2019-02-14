@@ -10,12 +10,10 @@ class test_politico(unittest.TestCase):
         self.data_party={"id":1,"name":"odm","hqAddress":"nairobi","logoUrl":"gfgfgf"}
         self.office={"name":"uhuru kenyatta","type":"president"}
 
-    def post(self, path='/parties', data={}):
-        if not data:
-            data = self.data_party
-
+    def test_post(self):
         resp = self.client.post(path='api/v1/parties', data=json.dumps(self.data_party), content_type='application/json')
-        return resp
+        self.assertEqual(resp.status_code, 201)
+    
 
     def post_office(self, path='/offices', data={}):
         if not data:
@@ -30,9 +28,7 @@ class test_politico(unittest.TestCase):
         pass
 
     def test_getting_a_single_party(self):
-        party = self.post()
-        path = '/api/v1/party/1'
-        response = self.client.get(path, content_type='application/json')
+        response = self.client.get(path='api/v1/parties', content_type='application/json')
         self.assertEqual(response.status_code, 200)
 
     def test_deleting_a_party(self):
@@ -45,17 +41,38 @@ class test_politico(unittest.TestCase):
         self.assertEqual(resp.status_code,200)
 
     def test_specific_office(self):
-        office = self.post_office()
         path = '/api/v1/offices/1'
         response = self.client.get(path, content_type='application/json')
         self.assertEqual(response.status_code, 200)
 
     def test_delete_specific_office(self):
         response=self.client.delete("api/v1/parties/0",content_type='application/json')
-        self.assertNotIn(response.data,"office deleted succesfully") 
+        self.assertNotIn(response.data,"office deleted succesfully")
+
+    def test_partyid_is_int(self):
+        resp=self.client.get(path='api/v1/party/y',content_type='application/json')
+        self.assertEqual(resp.status_code,404)
+    def test_get_party_no_id(self):
+        resp=self.client.get(path='api/v1/party/',content_type='application/json')
+        self.assertEqual(resp.status_code,404)
+
+    def test_get_office_not_int(self):
+        resp=self.client.get(path='api/v1/offices/y',content_type='application/json')
+        self.assertEqual(resp.status_code,404)
+
+    def test_officeid_is_int(self):
+        resp=self.client.get(path='api/v1/offices/1',content_type='application/json')
+        self.assertEqual(resp.status_code,200)
+    def test_get_office_no_id(self):
+        resp=self.client.get(path='api/v1/offices/',content_type='application/json')
+        self.assertEqual(resp.status_code,404)
+
+    
+
+    
 
     def tearDown(self):
-        pass
+        self.app.testing=False
 
 if __name__ == "__main__":
     unittest.main()

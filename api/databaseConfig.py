@@ -74,7 +74,7 @@ def tables():
     )"""
 
 
-#error in candidate and vote
+
 
     queries = [user, party,office,candidate,vote,petition]
     return queries
