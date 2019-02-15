@@ -54,7 +54,7 @@ class test_politico(unittest.TestCase):
         self.assertEqual(resp.status_code,404)
     def test_get_party_no_id(self):
         resp=self.client.get(path='api/v1/party/',content_type='application/json')
-        self.assertEqual(resp.status_code,404)
+        self.assertEqual(resp.status_code,200)
 
     def test_get_office_not_int(self):
         resp=self.client.get(path='api/v1/offices/y',content_type='application/json')
@@ -65,7 +65,7 @@ class test_politico(unittest.TestCase):
         self.assertEqual(resp.status_code,200)
     def test_get_office_no_id(self):
         resp=self.client.get(path='api/v1/offices/',content_type='application/json')
-        self.assertEqual(resp.status_code,404)
+        self.assertEqual(resp.status_code,200)
 
     
 
