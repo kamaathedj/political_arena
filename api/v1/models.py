@@ -1,7 +1,6 @@
 PARTIES_DATA = [{'id': 1,'name': 'Jubilee','hqAddress': 'nairobi','logoUrl': 'www.google.com'}]
-# PARTIES_DATA=[]
 POLITICAL_OFFICE = [{'id': 1, 'name': 'meme', 'type': 'president'},{'id': 2, 'name': 'wat', 'type': 'mp'}]
-# POLITICAL_OFFICE=[]
+
 
 
 class createParty:

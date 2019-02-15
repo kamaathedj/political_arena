@@ -109,23 +109,23 @@ def createOffice():
                if office["name"] != name and office['type'] !=mtype:
                     continue
                else:
-                   return jsonify({'message': "Cannot register an office twice"}, 400)  
+                   return jsonify({'message': "Cannot register an office twice"}),400  
             new_office = {'id': id, 'name': name, 'type': mtype}
             office_data.offices(new_office)
             message = 'Created'
-            return jsonify({'message': message}, 201)           
+            return jsonify({'message': message}),201           
         else:
             return jsonify({'status': 400,
                            'message': 'All the data must be type string'
                            }, 400)
     else:
-        return jsonify({'status': 400, 'message': 'No data found,please provide all the data required'}, 400)
+        return jsonify({'status': 400, 'message': 'No data found,please provide all the data required'}),400
 
 
 @userbp.route('/offices', methods=['GET'])
 def GetPoliticalOffices():
     if PARTIES_DATA ==None:
-         return jsonify({'error': "No data found","status":400}),400
+         return jsonify({'error': "No requested data found on the server","status":400}),400
 
     resp = office_data.GetAllOffices()
     return jsonify({'message': resp,'status':200}),200
@@ -138,7 +138,7 @@ def GetSpecificOffice(office_id):
     try:
         id = int(office_id)
     except:
-        return jsonify({'status': 404, 'Message': 'id must be of a number'}),404
+        return jsonify({'status': 404, 'Message': 'id must be  a number'}),404
     variable_types = (int, )
     if isinstance(id, variable_types) and id:
         specific_office = office_data.GetOfficeId(id)
@@ -147,5 +147,5 @@ def GetSpecificOffice(office_id):
         return jsonify({'message': mOffice})
     else:
         return jsonify({'status': 404,
-                       'error': 'e requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.'}, 404)
+                       'error': 'the requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.'}),400
 
