@@ -71,10 +71,14 @@ def SpecificPartyAndPatch(partyid):
     except:
         return jsonify({"error":'bad request',"status":400}),400
     data = request.get_json()
+    jsondata=json.dumps(data)
+    dictdata=ast.literal_eval(jsondata)
+    print(dictdata)
     
     
     if data:
-        name = data['name']
+        name = dictdata['name']
+        print(type(name))
         if isinstance(name,str):
             specific_party = party_data.GetSpecificPartyAndPatch(id, name)
             return jsonify({'message': specific_party,'status':200}),200
