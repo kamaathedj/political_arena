@@ -38,7 +38,7 @@ def create():
                            'message': 'The data you entered in the fieds are of diffrent type than the requires'
                            }, 400)
     else:
-        return jsonify({'status': 400, 'message': 'No data found,please provide all the fields .'}, 400)
+        return jsonify({'status': 400, 'message': 'No data found,please provide all the fields .'}),400
 
 
 @userbp.route('/parties', methods=['GET'])
@@ -54,10 +54,10 @@ def GetSpecificParty(party_id):
     try:
         id = int(party_id)
     except:
-        return jsonify({'status': 404, 'message': 'not found'}),404
+        return jsonify({'status': 404, 'message': ' The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again'}),404
     specific_party = party_data.getPartyId(id)
     if specific_party is None:
-        return jsonify({'status': 404, 'message': 'not found'}),404
+        return jsonify({'status': 404, 'message': ' The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again'}),404
     else:
         mparty = []
         mparty.append(specific_party)

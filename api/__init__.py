@@ -9,18 +9,18 @@ def methodNotAllowed(error):
     return jsonify({
         "error": "405(method not allowed),'status':405",
         "status":405
-    })
+    }),405
 
 def pageNotFound(error):
     return jsonify({
         "error": str(error),
         "status":404
-    })
+    }),404
 def badRequest(error):
     return jsonify({
         "error": str(error),
         "status":400
-    })
+    }),400
     
 
 
