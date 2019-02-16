@@ -31,12 +31,12 @@ def create():
 
             new_party = {'id': id,'name': name,'hqAddress': hqAddress,'logoUrl': logoUrl}
             party_data.parties(new_party)
-            message = 'Created'
+            message = 'Created, The party was succesfully created'
             return jsonify({'message': message}), 201
         else:
             return jsonify({'status': 400,
                            'message': 'The data you entered in the fieds are of diffrent type than the requires'
-                           }, 400)
+                           }),400
     else:
         return jsonify({'status': 400, 'message': 'No data found,please provide all the fields .'}),400
 
@@ -45,7 +45,7 @@ def create():
 def GetParties():
     parties = party_data.Getparties()
     if parties == None:
-        return jsonify({"message":"the requested resource is empty","status":404}),404
+        return jsonify({"message":"The requested resource is empty","status":404}),404
         
     return jsonify({'message': parties,"status":200}),200   
 
@@ -61,7 +61,7 @@ def GetSpecificParty(party_id):
     else:
         mparty = []
         mparty.append(specific_party)
-        return jsonify({'status': 200, 'message': mparty})
+        return jsonify({'status': 200, 'message': mparty}),200
 
 
 @userbp.route('/parties/<partyid>', methods=['PATCH'])
@@ -117,7 +117,7 @@ def createOffice():
         else:
             return jsonify({'status': 400,
                            'message': 'All the data must be type string'
-                           }, 400)
+                           }),400
     else:
         return jsonify({'status': 400, 'message': 'No data found,please provide all the data required'}),400
 
