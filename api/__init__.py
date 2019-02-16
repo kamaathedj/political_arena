@@ -1,6 +1,6 @@
 from instance.config import app_configurations
 from api.v1.views import userbp
-from api.v2.views.auth-view.user-View import v2_bp
+from api.v2.views.auth_view.user_view import v2_bp
 from flask import Flask,jsonify
 from api.v1.models import createParty
 
