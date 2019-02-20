@@ -1,4 +1,4 @@
-import psycopg2
+import psycopg2 
 connUrl="dbname='political_arena' host='localhost' port='5432' user='kamaa' password='DAka31..'"
 def connection():
     try:
@@ -15,18 +15,19 @@ def CreateTable():
     for creating_table in create:
         cur.execute(creating_table)
         conn.commit()
+    return "created"
     
     
 def tables():
-    user= """CREATE TABLE IF NOT EXISTS user (
-        id serial PRIMARY KEY NOT NULL,
+    user= """CREATE TABLE IF NOT EXISTS user_table (
+        id SERIAL PRIMARY KEY NOT NULL,
         firstname character varying(50) NOT NULL,
         lastname character varying(50) NOT NULL,
         othernames character varying(50),
-        username character varying(50) NOT NULL,
+        username character varying(50) NOT NULL UNIQUE,
         email character varying(50),
         phonenumber character varying(30),
-        password character varying(50) NOT NULL,
+        password character varying(100) NOT NULL,
         passportUrl character varying(50),
         isAdmin boolean NOT NULL
     )"""
@@ -49,7 +50,7 @@ def tables():
         id serial PRIMARY KEY NOT NULL,
         office_id INT NOT NULL REFERENCES office(id) ON DELETE CASCADE,
         party_id INT NOT NULL REFERENCES party(id) ON DELETE CASCADE,
-        candidate_id INT NOT NULL REFERENCES user(id) ON DELETE CASCADE,
+        candidate_id INT NOT NULL REFERENCES user_table(id) ON DELETE CASCADE,
         UNIQUE(office_id,party_id,candidate_id)
     
     )"""
@@ -57,7 +58,7 @@ def tables():
     vote = """CREATE TABLE IF NOT EXISTS vote (
         id serial PRIMARY KEY NOT NULL,
         createdOn timestamp with time zone DEFAULT ('now'::text)::date NOT NULL,
-        createdBy INT NOT NULL REFERENCES user(id) ON DELETE CASCADE,
+        createdBy INT NOT NULL REFERENCES user_table(id) ON DELETE CASCADE,
         office_id INT NOT NULL REFERENCES office(id) ON DELETE CASCADE,
         candidate_id INT NOT NULL REFERENCES candidate(id) ON DELETE CASCADE,
         UNIQUE(createdBy,office_id,candidate_id)
@@ -66,7 +67,7 @@ def tables():
     petition = """CREATE TABLE IF NOT EXISTS petition(
         id serial PRIMARY KEY NOT NULL,
         createdOn timestamp with time zone DEFAULT ('now'::text)::date NOT NULL,
-        createdBy INT NOT NULL REFERENCES user(id) ON DELETE CASCADE,
+        createdBy INT NOT NULL REFERENCES user_table(id) ON DELETE CASCADE,
         office_id INT NOT NULL REFERENCES office(id) ON DELETE CASCADE,
         body character varying(20) NOT NULL,
         UNIQUE(createdBy,office_id)
@@ -77,6 +78,7 @@ def tables():
 
 
     queries = [user, party,office,candidate,vote,petition]
+    print("tables created")
     return queries
 
     
