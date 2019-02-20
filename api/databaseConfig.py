@@ -9,12 +9,13 @@ def connection():
     return connection
 
 def CreateTable():
-    conn=connection()
-    cur=conn.cursor()
+    connection= psycopg2.connect(connUrl)
+    # conn=connection()
+    cur=connection.cursor()
     create=tables()
     for creating_table in create:
         cur.execute(creating_table)
-        conn.commit()
+        connection.commit()
     return "created"
     
     
