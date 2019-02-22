@@ -7,7 +7,7 @@ class DevelopmentConfig(BaseConfig):
     
 class TestingConfig():
     DEBUG=True
-class ProductionConfig():
+class ProductionConfig(BaseConfig):
     DEBUG=False
 
 app_configurations = {

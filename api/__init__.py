@@ -1,8 +1,11 @@
 from instance.config import app_configurations
 from api.v1.views import userbp
 from api.v2.views.auth_view.user_view import v2_bp
+from api.v2.views.offices_view.officeView import v2_bp
+from api.v2.views.parties_view.partyView import v2_bp
 from flask import Flask,jsonify
 from api.v1.models import createParty
+import os
 
 def methodNotAllowed(error):
     return jsonify({
@@ -25,7 +28,7 @@ def badRequest(error):
 
 def creating_app():
     app=Flask(__name__, instance_relative_config=True)
-    app.config.from_object(app_configurations["development"])
+    app.config.from_object(app_configurations[os.getenv('FLASK_ENV')])
     app.register_blueprint(userbp)
     app.register_blueprint(v2_bp)
     app.register_error_handler(405,methodNotAllowed)

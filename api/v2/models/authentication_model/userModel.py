@@ -1,4 +1,3 @@
-import psycopg2.extras
 from werkzeug.security import generate_password_hash
 from api.databaseConfig import connection
 from api.v2.utilities.validations.validation import isValid

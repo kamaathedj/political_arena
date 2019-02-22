@@ -1,5 +1,7 @@
 rawDataKeys={
     "user":("firstname", "lastname", "othername","username", "email", "password", "phonenumber", "passporturl", "is_admin"),
+    "offices":("name","type"),
+    "parties":("name","hqAddress","logoUrl")
 }
 
 class isValid:
