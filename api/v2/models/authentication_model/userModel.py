@@ -1,6 +1,7 @@
 from werkzeug.security import generate_password_hash
 from api.databaseConfig import connection
 from api.v2.utilities.validations.validation import isValid
+from api.v2.utilities.url_validate import url
 class user():
     def __init__(self,data=None):
         self.resp=data
@@ -10,7 +11,8 @@ class user():
         response=isValid().validate(data,tableName)
         password=generate_password_hash(data['password'],"sha256")
         print(password)
-        if response==True:
+        response_url=url(data['passporturl']).validateUrl()
+        if response==True and response_url==True:
             conn=connection()
             cur=conn.cursor()
             try:

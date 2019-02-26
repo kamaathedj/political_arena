@@ -1,4 +1,5 @@
 from api.v2.utilities.validations.validation import isValid
+from api.v2.utilities.url_validate import url
 from api.databaseConfig import connection
 class parties:
     def __init__(self,data):
@@ -7,7 +8,8 @@ class parties:
         tableName="parties"
         data=self.data
         resp=isValid().validate(data,tableName)
-        if resp==True:
+        emailResponse=url(data['logoUrl']).validateUrl()
+        if emailResponse==True and resp==True:
             conn=connection()
             cur=conn.cursor()
             try:
@@ -21,4 +23,4 @@ class parties:
             
             return resp
 
-        return resp
+        return emailResponse

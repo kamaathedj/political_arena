@@ -1,11 +1,12 @@
 from flask import jsonify,request,Blueprint
 from api.v2.models.authentication_model.userModel import user,log
+# from api.v2.views.parties_view.partyView import v2_bp
 import ast
 import json
 
-v2_bp = Blueprint('apiv2', __name__, url_prefix='/api/v2')
+bp_user = Blueprint('users', __name__,url_prefix='/api/v2')
 
-@v2_bp.route('/users', methods=['POST'])
+@bp_user.route('/users', methods=['POST'])
 def createUser():
     data=request.get_json()
     jsodata=json.dumps(data)
@@ -13,7 +14,7 @@ def createUser():
     resp=user(datadict).createUser()
     return jsonify({"message":"The account was created","message 2":resp})
 
-@v2_bp.route('/users',methods=['GET'])
+@bp_user.route('/users',methods=['GET'])
 def login():
     data=request.get_json()
     jsodata=json.dumps(data)

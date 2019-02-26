@@ -7,11 +7,11 @@ rawDataKeys={
 class isValid:
     def validate(self,data,tableName):
         resp=isValid().validation(data,tableName)
-        print(tableName)
         return resp   
     def validation(self,data,tableName):
         if all(y in data for y in rawDataKeys[tableName]):
             resp=isValid().validateValues(data)
+            print(resp)
             return resp
         else:
             return False
