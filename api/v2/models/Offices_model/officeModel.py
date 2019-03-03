@@ -1,4 +1,4 @@
-from api.v2.utilities.validations.validation import isValid
+from api.v2.utilities.validations.validation import validate
 from api.databaseConfig import connection
 class office:
     def __init__(self,data):
@@ -6,19 +6,21 @@ class office:
     def addoffice(self):
         data=self.data
         tableName="offices"
-        resp=isValid().validate(data,tableName)
-        if resp ==True:
-            conn=connection()
-            cur=conn.cursor()
-            try:
-                cur.execute("""INSERT INTO office(name,type)
-                VALUES (%s,%s);""",(data['name'],data['type']))
-                conn.commit()
-               
-            except:
-                conn.rollback()
-                return "database requires unique data"
+        resp=validate(data,tableName)
+        if resp['isvalid'] is False :
+            return resp["message"]
+        
+        conn=connection()
+        cur=conn.cursor()
+        try:
+            cur.execute("""INSERT INTO office(name,type)
+            VALUES (%s,%s);""",(data['name'],data['type']))
+            conn.commit()
             
-            return resp
+        except:
+            conn.rollback()
+            return "database requires unique data"
+        
+        return data
 
-        return resp
+            

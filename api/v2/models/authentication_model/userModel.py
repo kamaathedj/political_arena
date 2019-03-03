@@ -1,6 +1,6 @@
 from werkzeug.security import generate_password_hash
 from api.databaseConfig import connection
-from api.v2.utilities.validations.validation import isValid
+from api.v2.utilities.validations.validation import validate
 from api.v2.utilities.url_validate import url
 class user():
     def __init__(self,data=None):
@@ -8,11 +8,13 @@ class user():
     def createUser(self):
         data=self.resp
         tableName="user"
-        response=isValid().validate(data,tableName)
+        response=validate(data,tableName)
         password=generate_password_hash(data['password'],"sha256")
         print(password)
         response_url=url(data['passporturl']).validateUrl()
-        if response==True and response_url==True:
+        if response['isvalid']is False:
+            return response["message"]
+        if response_url is True:
             conn=connection()
             cur=conn.cursor()
             try:
@@ -20,7 +22,7 @@ class user():
                 VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s);""",(data['firstname'],data['lastname'],data['othername'],data['username'],data['email'],
                 password,data['phonenumber'],data['passporturl'],data['is_admin']))
                 conn.commit()
-               
+                
             except:
                 conn.rollback()
                 return "database requires unique data"
