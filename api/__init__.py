@@ -7,6 +7,9 @@ from flask import Flask,jsonify
 from api.v1.models import createParty
 import os
 
+
+
+
 def methodNotAllowed(error):
     return jsonify({
         "error": str(error),
@@ -23,7 +26,7 @@ def badRequest(error):
         "error": str(error),
         "status":400
     }),400
-    
+
 
 
 def creating_app():
@@ -36,5 +39,8 @@ def creating_app():
     app.register_error_handler(405,methodNotAllowed)
     app.register_error_handler(404,pageNotFound)
     app.register_error_handler(400,badRequest)
+    app.config['SECRET_KEY']='secret123'
     return app
+
+
 

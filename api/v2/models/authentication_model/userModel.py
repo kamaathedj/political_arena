@@ -1,4 +1,4 @@
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash,check_password_hash
 from api.databaseConfig import connection
 from api.v2.utilities.validations.validation import validate
 from api.v2.utilities.url_validate import url
@@ -31,8 +31,28 @@ class user():
 
 
 class log:
-    def login(self,data):
-        return "implement this login functionality"
+    def login(self,username):
+        conn=connection()
+        cur=conn.cursor()
+        try:
+            cur.execute("""SELECT * FROM user_table WHERE username=%s""",[username])
+            resp=cur.fetchone()
+            return resp
+        except :
+            return "error"
+
+    # token to fetch by id
+    def fortoken(self,id):
+        conn=connection()
+        cur=conn.cursor()
+        try:
+            cur.execute("""SELECT * FROM user_table WHERE id=%s""",[id])
+            resp=cur.fetchone()
+            return resp
+        except :
+            return "error"
+
+        
 
         
 
