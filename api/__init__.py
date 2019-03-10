@@ -3,6 +3,7 @@ from api.v1.views import userbp
 from api.v2.views.auth_view.user_view import bp_user
 from api.v2.views.offices_view.officeView import office_bp
 from api.v2.views.parties_view.partyView import v2_bp
+from api.v2.views.candidate_view.candidateView import candidate_bp
 from flask import Flask,jsonify
 from api.v1.models import createParty
 import os
@@ -36,6 +37,7 @@ def creating_app():
     app.register_blueprint(bp_user)
     app.register_blueprint(v2_bp)
     app.register_blueprint(office_bp)
+    app.register_blueprint(candidate_bp)
     app.register_error_handler(405,methodNotAllowed)
     app.register_error_handler(404,pageNotFound)
     app.register_error_handler(400,badRequest)
