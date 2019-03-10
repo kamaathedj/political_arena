@@ -30,13 +30,13 @@ def getparties(resp):
 @v2_bp.route('/parties/<int:id>',methods=['GET'])
 def getspecificparty(id):
     result=getpartys().getparty(id)
-    if result:
-        mlist=[]
-        mydict={"id":result[0],"name":result[1],"logoUrl":result[2]}
-        mlist.append(mydict)
-        return jsonify({"status":200,"data":mlist}),200
-    else:
-        return 
+    if not result:
+        return jsonify({"message":"There are no party with that id"})
+    mlist=[]
+    mydict={"id":result[0],"name":result[1],"logoUrl":result[2]}
+    mlist.append(mydict)
+    return jsonify({"status":200,"data":mlist}),200
+ 
         
 
 

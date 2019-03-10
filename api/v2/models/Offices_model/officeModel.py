@@ -22,5 +22,28 @@ class office:
             return "database requires unique data"
         
         return data
+    
+class getOffices:
+    def GetAllOffices(self):
+        conn=connection()
+        cur=conn.cursor()
+        try:
+            cur.execute("""SELECT * FROM office""")
+            result=cur.fetchall()
+            return result
+        except :
+            return "error"
+
+    def GetSpecificOffices(self,id):
+        conn=connection()
+        cur=conn.cursor()
+        try:
+            cur.execute("""SELECT * FROM office Where id=%s""",[id])
+            result=cur.fetchone()
+            return result
+        except :
+            return "error occured when parsing the database"
+        
+
 
             

@@ -10,7 +10,6 @@ class user():
         tableName="user"
         response=validate(data,tableName)
         password=generate_password_hash(data['password'],"sha256")
-        print(password)
         response_url=url(data['passporturl']).validateUrl()
         if response['isvalid']is False:
             return response["message"]
@@ -51,6 +50,17 @@ class log:
             return resp
         except :
             return "error"
+        
+    def getAllUsers(self):
+        conn=connection()
+        cur=conn.cursor()
+        try:
+            cur.execute("""SELECT * FROM user_table""")
+            result=cur.fetchall()
+            return result
+        except:
+            return "Error occured when parsing the database"
+        
 
         
 
