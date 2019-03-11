@@ -15,4 +15,4 @@ def candidate(resp,office_id):
         return jsonify({"error":result['message']})
     
     candidate={'office':office_id,"user":data['user_id']}
-    return jsonify({"data":candidate})
+    return jsonify({"data":candidate,"status":200}),200
