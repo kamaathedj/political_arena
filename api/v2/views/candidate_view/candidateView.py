@@ -12,7 +12,7 @@ def candidate(resp,office_id):
     data=request.get_json()
     result=candidates(data,office_id).registerCandidate()
     if result['status'] == False:
-        return jsonify({"error":result['message']})
+        return jsonify({"error":result['message']}),400
     
     candidate={'office':office_id,"user":data['user_id']}
     return jsonify({"data":candidate,"status":201}),201
