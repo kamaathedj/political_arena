@@ -1,17 +1,19 @@
-import psycopg2.extras
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash,check_password_hash
 from api.databaseConfig import connection
-from api.v2.utilities.validations.validation import isValid
+from api.v2.utilities.validations.validation import validate
+from api.v2.utilities.url_validate import url
 class user():
     def __init__(self,data=None):
         self.resp=data
     def createUser(self):
         data=self.resp
         tableName="user"
-        response=isValid().validate(data,tableName)
+        response=validate(data,tableName)
         password=generate_password_hash(data['password'],"sha256")
-        print(password)
-        if response==True:
+        response_url=url(data['passporturl']).validateUrl()
+        if response['isvalid']is False:
+            return response["message"]
+        if response_url is True:
             conn=connection()
             cur=conn.cursor()
             try:
@@ -19,7 +21,7 @@ class user():
                 VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s);""",(data['firstname'],data['lastname'],data['othername'],data['username'],data['email'],
                 password,data['phonenumber'],data['passporturl'],data['is_admin']))
                 conn.commit()
-               
+                
             except:
                 conn.rollback()
                 return "database requires unique data"
@@ -28,8 +30,39 @@ class user():
 
 
 class log:
-    def login(self,data):
-        return "implement this login functionality"
+    def login(self,username):
+        conn=connection()
+        cur=conn.cursor()
+        try:
+            cur.execute("""SELECT * FROM user_table WHERE username=%s""",[username])
+            resp=cur.fetchone()
+            return resp
+        except :
+            return "error"
+
+    # token to fetch by id
+    def fortoken(self,id):
+        conn=connection()
+        cur=conn.cursor()
+        try:
+            cur.execute("""SELECT * FROM user_table WHERE id=%s""",[id])
+            resp=cur.fetchone()
+            return resp
+        except :
+            return "error"
+        
+    def getAllUsers(self):
+        conn=connection()
+        cur=conn.cursor()
+        try:
+            cur.execute("""SELECT * FROM user_table""")
+            result=cur.fetchall()
+            return result
+        except:
+            return "Error occured when parsing the database"
+        
+
+        
 
         
 

@@ -9,13 +9,13 @@ def connection():
     return connection
 
 def CreateTable():
-    connection= psycopg2.connect(connUrl)
-    # conn=connection()
-    cur=connection.cursor()
+   
+    conn=connection()
+    cur=conn.cursor()
     create=tables()
     for creating_table in create:
         cur.execute(creating_table)
-        connection.commit()
+        conn.commit()
     return "created"
     
     
@@ -34,30 +34,30 @@ def tables():
     )"""
 
     party = """CREATE TABLE IF NOT EXISTS party(
-        id serial PRIMARY KEY NOT NULL,
-        name character varying(20) NOT NULL,
+        id SERIAL PRIMARY KEY NOT NULL,
+        name character varying(20) NOT NULL UNIQUE,
         hqAddress character varying(30) NOT NULL,
-        logoUrl character varying(50)
+        logoUrl character varying(50) NOT NULL UNIQUE
         
     )"""
     office = """CREATE TABLE IF NOT EXISTS office (
-        id serial PRIMARY KEY NOT NULL,
-        name character varying(20) NOT NULL,
+        id SERIAL PRIMARY KEY NOT NULL,
+        name character varying(20) NOT NULL UNIQUE,
         type character varying(30) NOT NULL
         
     )"""
 
     candidate = """CREATE TABLE IF NOT EXISTS candidate(
-        id serial PRIMARY KEY NOT NULL,
+        id SERIAL PRIMARY KEY NOT NULL,
         office_id INT NOT NULL REFERENCES office(id) ON DELETE CASCADE,
         party_id INT NOT NULL REFERENCES party(id) ON DELETE CASCADE,
         candidate_id INT NOT NULL REFERENCES user_table(id) ON DELETE CASCADE,
-        UNIQUE(office_id,party_id,candidate_id)
+        UNIQUE(party_id,candidate_id)
     
     )"""
 
     vote = """CREATE TABLE IF NOT EXISTS vote (
-        id serial PRIMARY KEY NOT NULL,
+        id SERIAL PRIMARY KEY NOT NULL,
         createdOn timestamp with time zone DEFAULT ('now'::text)::date NOT NULL,
         createdBy INT NOT NULL REFERENCES user_table(id) ON DELETE CASCADE,
         office_id INT NOT NULL REFERENCES office(id) ON DELETE CASCADE,
@@ -66,7 +66,7 @@ def tables():
         
     )"""
     petition = """CREATE TABLE IF NOT EXISTS petition(
-        id serial PRIMARY KEY NOT NULL,
+        id SERIAL PRIMARY KEY NOT NULL,
         createdOn timestamp with time zone DEFAULT ('now'::text)::date NOT NULL,
         createdBy INT NOT NULL REFERENCES user_table(id) ON DELETE CASCADE,
         office_id INT NOT NULL REFERENCES office(id) ON DELETE CASCADE,
