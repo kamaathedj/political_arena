@@ -6,10 +6,12 @@ from api import creating_app
 class test_politico(unittest.TestCase):
     def setUp(self):
         self.app=app
+        app.testing=True
         self.client=self.app.test_client()
         self.data_party={"id":1,"name":"odm","hqAddress":"nairobi","logoUrl":"gfgfgf"}
         self.data_party1={}
         self.office={"name":"uhuru kenyatta","type":"president"}
+        self.office_empty={}
 
     def test_post(self):
         resp = self.client.post(path='api/v1/parties', data=json.dumps(self.data_party), content_type='application/json')
@@ -23,6 +25,9 @@ class test_politico(unittest.TestCase):
             data = self.office
         resp = self.client.post(path='api/v1/', data=json.dumps(self.data_party), content_type='application/json')
         return resp
+    # def test_empty_office(self):
+    #     response=self.client.post("api/v1/offices",data=json.dumps(self.office_empty),content_type='application/json')
+    #     self.assertEqual(response.status_code,400)
         
     def test_getall_parties(self):
         resp=self.client.get(path='api/v1/parties',content_type='application/json')

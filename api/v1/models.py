@@ -1,4 +1,5 @@
-PARTIES_DATA = [{'id': 1,'name': 'Jubilee','hqAddress': 'nairobi','logoUrl': 'www.google.com'}]
+PARTIES_DATA = [{'id': 1,'name': 'Jubilee','hqAddress': 'nairobi','logoUrl': 'www.google.com'},
+{'id': 2,'name': 'meme','hqAddress': 'nairobi','logoUrl': 'www.url.com'}]
 POLITICAL_OFFICE = [{'id': 1, 'name': 'meme', 'type': 'president'},{'id': 2, 'name': 'wat', 'type': 'mp'}]
 
 
@@ -12,6 +13,7 @@ class createParty:
     def getPartyId(self, id):
         party_loop = None
         for party in PARTIES_DATA:
+            import pdb; pdb.set_trace()
             if party['id'] == id:
                 party_loop = party
                 break
@@ -24,7 +26,6 @@ class createParty:
         for party in PARTIES_DATA:
             if party['id'] == party_id:
                 party['name'] = name
-                
             return party
 
     def GetSpecificPartyAndDelete(self, partyid):
