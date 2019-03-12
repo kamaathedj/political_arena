@@ -28,8 +28,6 @@ def badRequest(error):
         "status":400
     }),400
 
-
-
 def creating_app():
     app=Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_configurations[os.getenv('FLASK_ENV')])
@@ -43,6 +41,7 @@ def creating_app():
     app.register_error_handler(400,badRequest)
     app.config['SECRET_KEY']='secret123'
     return app
+
 
 
 
