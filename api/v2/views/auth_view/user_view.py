@@ -2,6 +2,7 @@
 from flask import jsonify,request,Blueprint,make_response
 from werkzeug.security import check_password_hash
 from api.v2.models.authentication_model.userModel import user,log
+from flask import current_app
 from functools import wraps
 import ast
 import json
@@ -18,10 +19,10 @@ def token_required(f):
         if not token:
             return jsonify({"message":"token is missing"}),401
         try:
-            data=jwt.decode(token,os.getenv('FLASK_SECRET'))
+            data=jwt.decode(token,current_app.config['SECRET_KEY'])
             resp=log().fortoken(data['id'])
         except:
-            return jsonify({"message":"token invalid"}),401
+            return jsonify({"message":"token invalid or expired"}),401
         return f(resp,*args,**kwargs)
     return decorated
 
@@ -53,7 +54,7 @@ def login():
             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30),
             'id': resp[0]
         }
-        token=jwt.encode(payload,os.getenv('FLASK_SECRET'), algorithm='HS256')
+        token=jwt.encode(payload,current_app.config['SECRET_KEY'], algorithm='HS256')
         decoded=token.decode()
         mlist=[]
         mdict={}
