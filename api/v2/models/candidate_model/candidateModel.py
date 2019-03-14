@@ -1,4 +1,5 @@
 from api.databaseConfig import connection
+from api.v2.utilities.validations.validation import validate
 
 class candidates:
     def __init__(self,user_id,office_id):
@@ -8,7 +9,19 @@ class candidates:
     def registerCandidate(self):
         conn=connection()
         cur=conn.cursor()
-       
+        data=self.user
+        tableName="candidate"
+        id=self.user.get('user_id')
+        party=self.user.get('party_id')
+
+        data2={"party_id":party,"user_id":id,"office_id":self.office}
+        response=validate(data2,tableName)
+        if response['isvalid'] is False:
+            return{
+                'status':False,
+                'message':response['message']
+
+            }
         try:
             id=self.user.get('user_id')
             party_id=self.user.get('party_id')

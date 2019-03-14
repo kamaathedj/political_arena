@@ -2,7 +2,8 @@ import string
 rawDataKeys={
     "user":("firstname", "lastname", "othername","username", "email", "password", "phonenumber", "passporturl", "is_admin"),
     "offices":("name","type"),
-    "parties":("name","hqAddress","logoUrl")
+    "parties":("name","hqAddress","logoUrl"),
+    "candidate":("user_id","office_id","party_id")
 }
 
 
