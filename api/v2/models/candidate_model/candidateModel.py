@@ -39,5 +39,15 @@ class candidates:
                 'status':False,
                 'message':message   
             }
-
+class getting:
+    def getCandidates(self):
+        conn=connection()
+        cur=conn.cursor()
+        try:
+            cur.execute("""SELECT * FROM candidate""")
+            data=cur.fetchall()
+            return data
+        except :
+            return 'error from db'
         
+      
