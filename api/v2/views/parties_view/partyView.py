@@ -19,6 +19,8 @@ def party(resp):
 @v2_bp.route('/parties',methods=['GET'])
 @token_required
 def getparties(resp):
+    if resp[9]==False:
+        return jsonify({"message":"you are not the admin"})
     result=getpartys().getParties()
     mlist=[]
     for re in result:

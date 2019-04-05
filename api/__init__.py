@@ -39,7 +39,7 @@ def creating_app():
     app.register_error_handler(405,methodNotAllowed)
     app.register_error_handler(404,pageNotFound)
     app.register_error_handler(400,badRequest)
-    app.config['SECRET_KEY']='secret123'
+    app.config['SECRET_KEY']='3fb1b6102d086c34e9ee74a43ef255e6'
     return app
 
 
