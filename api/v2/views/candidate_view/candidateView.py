@@ -8,7 +8,7 @@ candidate_bp=Blueprint('candidate',__name__,url_prefix='/api/v2')
 @token_required
 def candidate(resp,office_id):
     if resp[9]==False:
-        return jsonify({"message":"you are not the admin"})
+        return jsonify({"message":"you are not the admin , please login as admin to access this functionality"})
     data=request.get_json()
     result=candidates(data,office_id).registerCandidate()
     if result['status'] == False:
@@ -21,7 +21,7 @@ def candidate(resp,office_id):
 @token_required
 def GetCandidates(resp):
     if resp[9]==False:
-        return jsonify({"message":"you are not the admin"})
+        return jsonify({"message":"you are not the admin, please login as admin to access this functionality"})
     resp=getting().getCandidates()
     if not resp:
         return jsonify({'data':'error'})
