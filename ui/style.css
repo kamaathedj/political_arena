@@ -1,0 +1,232 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #5D8AA6;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 30%;
+  height: 300px; /* only for demonstration, should be removed */
+  background: #e3e3e3;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #C5D9CC;
+  
+}
+
+
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.vie{
+  align-content: center;
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+.vie label{
+align-content: center;
+padding-top: 20px;
+
+}
+.select{
+  color: #fff;
+  width: 200px;
+  height: 40px;
+  margin-top: -5px;
+   background-color:#5D8AA6;
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+   padding-left: 15px;
+}
+
+/* Style the footer */
+footer {
+  background-color: #5D8AA6;
+  padding: 10px;
+  color: white;
+  
+}
+
+
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+
+.nav{
+  
+  padding-right: 70px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  
+  
+  
+  
+}
+.nav_item{
+  padding: 10px;
+  border: 1px;
+  font-size: 20px;
+  margin: auto;
+  text-align: center;
+  margin-top: 10px;
+  width: 150px;
+  background-color: #C5D9CC
+  
+  
+}
+.list_name{
+  display: inline-block;
+  width: 20%;
+  }
+  .list_head{
+    text-align: center
+  }
+  .form_center{
+    width: 100%;
+    text-align: center;
+    
+  }
+  .align-form{
+    align-self: center;
+    margin-left: 410px;
+    
+  }
+
+
+.button_yes{
+display: inline-block;
+color: #fff;
+background-color: #452559;
+border-color: #C5D9CC;
+border: 1px solid transparent;
+border-radius: 4px;
+padding: 6px 12px;
+margin-bottom: 0;
+font-size: 14px;
+font-weight: normal;
+line-height: 1.42857143;
+text-align: center;
+
+}
+.button_no{
+display: inline-block;
+color: #fff;
+background-color: #F2163E;
+border-color: #C5D9CC;
+border: 1px solid transparent;
+border-radius: 4px;
+padding: 6px 12px;
+margin-bottom: 0;
+font-size: 14px;
+font-weight: normal;
+line-height: 1.42857143;
+text-align: center;
+
+}
+.cta{
+width: 100px;
+position: fixed;
+left: 700px;
+top: 460px;
+
+}
+.text{
+color: #3D2DA6;
+
+}
+.footer-nav_item{
+display: inline-block;
+width: 33%;
+}
+.signup-form label,
+.signup-form input{
+display:block;
+margin-top:1rem;
+width:25rem;
+
+
+}
+.signup-form input{
+border:1px solid #452559;
+padding:0.3rem 0.6rem;
+font:inherit;
+border-radius:0.6rem;
+background:#C5D9CC;
+}
+.signup-form input:focus{
+outline:none;
+background:#e3e3e3;
+border-color:#3D2DA6;
+}
+.btn-place{
+margin-left:300px;
+margin-top:20px;
+
+}
+.party_form .slogan,.mission{
+  width: 30rem;
+  height: 6rem;
+}
+.party_form .slogan{
+  width: 30rem;
+}
+.table{
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+td{
+  padding-left: 4rem;
+}
+.td-space{
+  padding-left:9rem;
+
+}
+.seat-space{
+  padding-left: 12rem;
+}
+.signup-form .seat_role{
+  height: 100px;
+}
+textarea{
+  display: block;
+  background: #C5D9CC;
+}
+textarea:focus{
+  background:#e3e3e3;
+  border-color:#3D2DA6;
+}
